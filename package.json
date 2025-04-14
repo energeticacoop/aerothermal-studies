@@ -1,0 +1,28 @@
+{
+  "name": "aerothermal-studies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/energeticacoop/aerothermal-studies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/energeticacoop/aerothermal-studies/issues"
+  },
+  "homepage": "https://github.com/energeticacoop/aerothermal-studies#readme",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  },
+  "dependencies": {
+    "sinon": "^20.0.0"
+  }
+}
