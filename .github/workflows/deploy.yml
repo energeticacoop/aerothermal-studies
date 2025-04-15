@@ -28,7 +28,6 @@ jobs:
       - name: Setup clasp credentials
         run: |
           echo "$CLASP_CREDENTIALS" > ~/.clasprc.json
-          cat ~/.clasprc.json
         env:
           CLASP_CREDENTIALS: ${{ secrets.CLASP_CREDENTIALS }}
 
