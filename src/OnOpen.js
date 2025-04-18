@@ -1,59 +1,76 @@
-/**
- * Adds custom menus to the Google Sheets UI.
- */
 function onOpen() {
   const ui = SpreadsheetApp.getUi()
   ui
-    .createMenu("🌤️ Producción")
-    .addItem("🌤️ Obtener ficheros de clima para SAM", "getClimateFile")
-    .addItem("🛰️ Obtener imágenes de satélite", "getSatelliteImages")
-    .addItem("🗺️ Calcular coordenadas UTM", "getUTMcoordinates")
-    .addItem("📌 Obtener código postal", "getPostalCode")
+    .createMenu("🔥 Estudios calefacción")
+    .addItem("🖇️ Importar base de datos de materiales", "importDb")
+    .addItem("📂 Generar enlaces a directorios de documentación", "printAllFoldersLinks")
     .addSeparator()
-    .addItem("⏬ Procesar todas las acciones de producción", "processProduction")
+    .addItem("📘 Generar estudio de aerotermia con radiadores", "generateRadiatorAE")
+    .addItem("📘 Generar estudio de aerotermia con suelo radiante", "generateUnderfloorAE")
+    .addItem("📘 Generar estudio de aerotermia nueva o sin consumos con radiadores", "generateNewRadiatorAE")
+    .addItem("📘 Generar estudio de aerotermia nueva o sin consumos con suelo radiante", "generateNewUnderfloorAE")
+    .addSeparator()
+    .addItem("📕 Generar estudio de biomasa con caldera", "generateBoiler")
+    .addItem("📕 Generar estudio de biomasa con hidroestufa", "generateWater")
+    .addItem("📕 Generar estudio de biomasa con estufa", "generateHeater")
+    .addItem("📕 Generar estudio de biomasa con hidroestufa", "generateFire")
+    .addSeparator()
+    .addItem("📙 Generar Memoria Técnica y BOEL", "createDocumentation")
+    .addSeparator()
+    .addItem("📙 Generar Modelo RITE", "createRITEmemory")
+    .addSeparator()
+    .addItem("📙 Generar Contrato", "createContract")
     .addToUi()
-
-  ui
-    .createMenu("🔌 Consumo")
-    .addItem("💡 Procesar consumos convencionales", "processConventionalConsumption")
-    .addItem("⏱️ Procesar consumos recurrentes", "processRecurringConsumption")
-    .addItem("♨️ Simular consumos aerotermia", "processASHPConsumptions")
-    .addItem("🚘 Simular consumos vehículo eléctrico", "processSAVEConsumption")
-    .addSeparator()
-    .addItem("⏬ Procesar todos los consumos", "processAllConsumptions")
-    .addToUi()
-
-  ui
-    .createMenu("👩‍💻 Ingeniería")
-    .addItem("📋 Cargar presupuesto tipo", "populateBudget")
-    .addSeparator()
-    .addItem("🐝 Procesar Flux Solar", "processFluxSolar")
-    .addToUi()
-
-  ui
-    .createMenu("📚 Documentación")
-    .addItem("📗 Generar estudio definitivo", "createFinalStudy")
-    .addItem("📙 Generar documentación para firma", "create00FolderDocumentation")
-    .addItem("📙 Generar documentación DROU", "create01FolderDocumentation")
-    .addItem("📙 Generar memoria técnica o proyecto y guía instalación", "createMemoryOrProjectAndGuide")
-    .addItem("📙 Generar factura", "createBill")
-    .addItem("📙 Generar BOEL y registro autoconsumo", "create02And03FolderDocumentation")
-    .addItem("📙 Generar documentación proyecto", "create04FolderDocumentation")
-    .addItem("📙 Generar documentación distribuidora", "create05FolderDocumentation")
-    .addItem("📚 Generar estudio definitivo individual y toda la documentación", "createAllDocuments")
-    .addSeparator()
-    .addItem("📙 Generar Certificado MGE", "createMGEcertificate")
-    .addSeparator()
-    .addItem("📗 Generar estudio instalación compartida", "createSharedStudy")
-    .addItem("📗 Generar estudio personalizado instalación compartida", "createCustomSharedStudy")
-    .addItem("📗 Generar estudios ahorro instalación compartida", "createSavingsSharedStudy")
-    .addToUi()
-
 
   ui.createMenu("🤖 Utilidades")
-    //.addItem("🗑️ Eliminar campos en la hoja activa","clearCells")
-    .addItem("🗑️ Eliminar curvas de carga seleccionadas","clearLoadCurves")
-    .addItem("🖇️ Importar base de datos de materiales", "importDb")
+    //.addItem("💣 Borrar todos los campos de la pestaña actual", "eraseNamedFields")
+    .addItem("💣 Borrar campos de salida de documentos", "forgetFolders")
     .addToUi()
-
 }
+
+function checkDatabase() {
+  if (getValue("fechaImportacion") == "") importDb()
+}
+
+function generateRadiatorAE() {
+  createDocuments(getStudyTemplates("1p1RCsYWr8oNgr0-DnO_ky3kBp2gx30n2XLW1SzKCUeY", "Estudio aerotermia con radiadores"), "outputStudy")
+}
+
+function generateUnderfloorAE() {
+  createDocuments(getStudyTemplates("1-w_4EUponNr7bUgH1Uu_vb7yZrzr4eqDiFfHFgewggU", "Estudio aerotermia con suelo radiante"), "outputStudy")
+}
+
+function generateNewRadiatorAE() {
+  createDocuments(getStudyTemplates("1lpB_g7nBTmFW3AdXYW1tqfR1JnBzt7wJskrK50RXLM0", "Estudio aerotermia con radiadores"), "outputStudy")
+}
+
+function generateNewUnderfloorAE() {
+  createDocuments(getStudyTemplates("1Ll7ZkD-G-OMMB4xScdg2iL3Hknq9vChNZijglCGDMWc", "Estudio aerotermia con suelo radiante"), "outputStudy")
+}
+
+function generateBoiler() {
+  createDocuments(getStudyTemplates("1EGQtUqyQOeT_bw1r89AYe2C3SyEis0mLyPPKiQZiKso", "Estudio biomasa con caldera"), "outputStudy")
+}
+
+function generateWater() {
+  createDocuments(getStudyTemplates("1cvyP1Esg56g_UUQK10RGilOjGYVNO8wGRWKRhWxj1r4", "Estudio biomasa con hidroestufa"), "outputStudy")
+}
+
+function generateHeater() {
+  createDocuments(getStudyTemplates("1gHNhuA3e2Te1_IKMwyo0LwAqoiz4cDfokKshoyTPOSI", "Estudio biomasa con estufa"), "outputStudy")
+}
+
+function generateFire() {
+  createDocuments(getStudyTemplates("1XYiZCwf2By3XAQSQvdHH7LsK_6DTAXDvFDljurjGJxU", "Estudio biomasa con leña"), "outputStudy")
+}
+
+function createDocumentation() {
+  createDocuments(get02FolderTemplates(), "output02Folder")
+}
+
+function createContract() {
+  createDocuments(getContractTemplate(), "outputContract")
+}
+
+
+
