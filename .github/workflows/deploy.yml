@@ -33,6 +33,10 @@ jobs:
 
       - name: Select clasp environment
         run: |
+          # Check if the current branch is 'main' or 'dev'
+          # and copy the corresponding clasp configuration file
+          # to .clasp.json
+          echo "Current branch: $GITHUB_REF"
           if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
             cp clasp.prod.json .clasp.json
           else
