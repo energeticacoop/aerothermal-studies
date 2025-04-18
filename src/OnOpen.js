@@ -1,4 +1,4 @@
-// V.0.0.1 18/04/25
+// V_1.0.0 18/04/25
 function onOpen() {
   const ui = SpreadsheetApp.getUi()
   ui
