@@ -1,7 +1,6 @@
 function onOpen() {
   const ui = SpreadsheetApp.getUi()
   ui.createMenu("🔥 Estudios calefacción")
-    .addItem("🖇️ Importar base de datos de materiales", "importDb")
     .addItem(
       "📂 Generar enlaces a directorios de documentación",
       "printAllFoldersLinks"
@@ -37,6 +36,7 @@ function onOpen() {
     .addToUi()
 
   ui.createMenu("🤖 Utilidades")
+    .addItem("🖇️ Importar base de datos de materiales", "importDb")
     .addItem("💣 Borrar campos de salida de documentos", "forgetFolders")
     .addToUi()
 }
