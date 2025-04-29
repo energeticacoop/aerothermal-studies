@@ -44,4 +44,4 @@ jobs:
           fi
 
       - name: Deploy to Google Apps Script
-        run: clasp push -f
+        run: clasp push
