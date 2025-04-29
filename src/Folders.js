@@ -26,47 +26,27 @@ function getDestinationFolder(destinationFolderName) {
   }
 }
 
-function forgetFolders() {
-  const erasableRangesDocumentation = [
-    "clientFolder",
-    "outputStudy",
-    //"adminFolder",
-    //"outputGuide",
-    //"output00Folder",
-    //"output01Folder",
-    "output02Folder",
-    //"output03Folder",
-    //"output04Folder",
-    //"outputMemory",
-  ]
-
-  SpreadsheetApp.getActiveSpreadsheet()
-    .getNamedRanges()
-    .forEach((range) => {
-      if (erasableRangesDocumentation.includes(range.getName()))
-        range.getRange().clearContent()
-    })
+function getParentFolderId() {
+  return DriveApp.getFileById(SpreadsheetApp.getActiveSpreadsheet().getId())
+    .getParents()
+    .next()
+    .getId()
 }
 
-function printFolderLink(rangename) {
-  const folder = getDestinationFolder(rangename)
-  setURL(getRangeByName(rangename), folder.getUrl(), folder.getName())
+function getParentFolder() {
+  return DriveApp.getFolderById(getParentFolderId())
 }
 
-function printAllFoldersLinks() {
-  // Print folder links
-  const clientFolder = getDestinationFolder("clientFolder")
-  setURL(
-    getRangeByName("clientFolder"),
-    clientFolder.getUrl(),
-    `Directorio madre: ${clientFolder.getName()}`
-  )
-  printFolderLink("folder01")
-  printFolderLink("folder02")
-  //printFolderLink("folder0200")
-  //printFolderLink("folder0201")
-  printFolderLink("folder0202")
-  //printFolderLink("folder0203")
-  //printFolderLink("folder0204")
-  //printFolderLink("folder03")
+function downloadFile(fileURL, fileName, destinationFolder) {
+  var response = UrlFetchApp.fetch(fileURL, { muteHttpExceptions: true })
+  var rc = response.getResponseCode()
+  if (rc == 200) {
+    var fileBlob = response.getBlob()
+    if (destinationFolder != null) {
+      var file = destinationFolder.createFile(fileBlob)
+      file.setName(fileName)
+    }
+  }
+  var fileInfo = { rc: rc, file: file }
+  return fileInfo
 }
