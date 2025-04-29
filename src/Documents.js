@@ -215,3 +215,32 @@ function createStudyAdditionalContents(doc) {
 
   return doc
 }
+
+function setImage(doc, replacementValue, imageBlob, imageWidth) {
+  var searchResult = doc.getBody().findText(replacementValue)
+  if (searchResult) {
+    var imageContainer = searchResult.getElement().getParent().asParagraph()
+    imageContainer.clear()
+    const image = imageContainer.appendInlineImage(imageBlob)
+
+    const width = image.getWidth()
+    const height = image.getHeight()
+    image.setWidth(imageWidth).setHeight((height * imageWidth) / width)
+
+    return image
+  }
+}
+
+function replaceImage(doc, replacementValue, imageBlob, imageWidth) {
+  const searchResult = doc.getBody().findText(replacementValue)
+  if (searchResult) {
+    // Set image
+    var imageContainer = searchResult.getElement().getParent().asParagraph()
+    imageContainer.clear()
+    const insertedImage = imageContainer.appendInlineImage(imageBlob)
+    const width = insertedImage.getWidth()
+    const height = insertedImage.getHeight()
+    insertedImage.setWidth(imageWidth).setHeight((height * imageWidth) / width)
+    return insertedImage
+  }
+}
