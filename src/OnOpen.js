@@ -2,11 +2,6 @@ function onOpen() {
   const ui = SpreadsheetApp.getUi()
   ui.createMenu("🔥 Estudios calefacción")
     .addItem(
-      "📂 Generar enlaces a directorios de documentación",
-      "printAllFoldersLinks"
-    )
-    .addSeparator()
-    .addItem(
       "📘 Generar estudio de aerotermia con radiadores",
       "generateRadiatorAE"
     )
