@@ -1,7 +1,9 @@
 function version() {
-    // v1.0.1 30/04/25 Estudio calefacción (aerotermia y biomasa) automatizado
+    // Estudio calefacción (aerotermia y biomasa) automatizado
+    // v1.0.1 30/04/25 original
     // v1.0.2 01/06/25 Add en Master {direccionymas} to the template [Modelo_Memoria_RITE.pdf]
     // v1.0.3 05/06/25 Add en Master "Reforma", {ref_catastral}, {eq_xx}, {Refrigerante, datos}, {Rendimiento} to the template [Modelo_Memoria_RITE.pdf]
+    // v1.0.4 07/06/25 Add _rangename list
 
 
 
@@ -20,4 +22,4 @@ function version() {
   
 
     // pdte update in Github
-    // pdte update DEV
+    // pdte update Master
